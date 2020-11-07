@@ -38,7 +38,6 @@ object ListScenario : Scenario(
 
                     action {
                         reactions.sayRandom(what_else_strings)
-                        reactions.go(firstItem)
                     }
                 }
 

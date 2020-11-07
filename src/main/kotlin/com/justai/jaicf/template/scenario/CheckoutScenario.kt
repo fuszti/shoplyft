@@ -50,7 +50,6 @@ object CheckoutScenario : Scenario() {
                     }
                     action {
                         reactions.say("What do you want to remove?")
-                        reactions.go(removeState)
                     }
                 }
 
