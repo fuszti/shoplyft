@@ -46,7 +46,7 @@ object ListScenario : Scenario() {
             }
 
             fallback {
-                // Save stuff
+                LocalShoppingCart.add(request.clientId.toString(), request.input)
                 reactions.sayRandom(what_else_strings)
             }
         }
