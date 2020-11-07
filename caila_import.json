@@ -1,173 +1,95 @@
-{
-  "project": {
-    "id": "jaicf-jaicp-caila-template",
-    "name": "jaicf-jaicp-caila-template",
-    "folder": "/"
+[
+  {
+    "id": 9120,
+    "path": "/Bye",
+    "enabled": true,
+    "shared": false,
+    "phrases": [
+      {
+        "text": "goodbye"
+      },
+      {
+        "text": "bye"
+      },
+      {
+        "text": "see you"
+      }
+    ],
+    "patterns": []
   },
-  "settings": {
-    "language": "en",
-    "spellingCorrection": false,
-    "classificationAlgorithm": "sts",
-    "timezone": "UTC",
-    "shared": false
+  {
+    "id": 9119,
+    "path": "/Hello",
+    "enabled": true,
+    "shared": false,
+    "phrases": [
+      {
+        "text": "hi"
+      },
+      {
+        "text": "hello"
+      },
+      {
+        "text": "welcome"
+      },
+      {
+        "text": "hey"
+      }
+    ],
+    "patterns": []
   },
-  "intents": [
-    {
-      "id": 6760,
-      "path": "/Bye",
-      "enabled": true,
-      "shared": false,
-      "phrases": [
-        {
-          "text": "goodbye"
-        },
-        {
-          "text": "bye"
-        },
-        {
-          "text": "see you"
-        }
-      ],
-      "patterns": []
-    },
-    {
-      "id": 6761,
-      "path": "/Hello",
-      "enabled": true,
-      "shared": false,
-      "phrases": [
-        {
-          "text": "hi"
-        },
-        {
-          "text": "hello"
-        },
-        {
-          "text": "welcome"
-        }
-      ],
-      "patterns": [
-        {
-          "text": "hey"
-        },
-        {
-          "text": "hi"
-        },
-        {
-          "text": "hello"
-        }
-      ]
-    },
-    {
-      "id": 50001,
-      "path": "/Yes",
-      "enabled": true,
-      "shared": false,
-      "phrases": [
-        {
-          "text": "yes"
-        },
-        {
-          "text": "yep"
-        },
-        {
-          "text": "aha"
-        }
-      ],
-      "patterns": []
-    },
-    {
-      "id": 50002,
-      "path": "/No",
-      "enabled": true,
-      "shared": false,
-      "phrases": [
-        {
-          "text": "no"
-        },
-        {
-          "text": "nope"
-        },
-        {
-          "text": "nah"
-        }
-      ],
-      "patterns": []
-    },
-    {
-      "id": 6762,
-      "path": "/Smalltalk",
-      "enabled": true,
-      "shared": false,
-      "phrases": [],
-      "patterns": []
-    },
-    {
-      "id": 6763,
-      "path": "/Smalltalk/Help",
-      "description": "",
-      "answer": "I'm a templated bot and can't do useful things yet...",
-      "enabled": true,
-      "shared": false,
-      "phrases": [
-        {
-          "text": "help"
-        },
-        {
-          "text": "what can you do"
-        },
-        {
-          "text": "your functions"
-        },
-        {
-          "text": "your possibilities"
-        },
-        {
-          "text": "tell me about you"
-        }
-      ],
-      "patterns": []
-    },
-    {
-      "id": 6764,
-      "path": "/Smalltalk/HowAreYou",
-      "answer": "I'm fine! Thank you!",
-      "enabled": true,
-      "shared": false,
-      "phrases": [
-        {
-          "text": "how are you"
-        }
-      ],
-      "patterns": []
-    },
-    {
-      "id": 6765,
-      "path": "/Smalltalk/WhatIsYourName",
-      "answer": "I don't have a name yet, I'm just a bot",
-      "enabled": true,
-      "shared": false,
-      "phrases": [
-        {
-          "text": "what is your name"
-        },
-        {
-          "text": "how to name you"
-        },
-        {
-          "text": "say me your name"
-        }
-      ],
-      "patterns": []
-    }
-  ],
-  "entities": [],
-  "enabledSystemEntities": [
-    "duckling.number",
-    "duckling.time",
-    "duckling.duration",
-    "duckling.phone-number",
-    "duckling.email",
-    "duckling.url"
-  ]
-}
+  {
+    "id": 9330,
+    "path": "/No",
+    "enabled": true,
+    "shared": false,
+    "phrases": [
+      {
+        "text": "No"
+      },
+      {
+        "text": "Nope"
+      },
+      {
+        "text": "None"
+      }
+    ],
+    "patterns": []
+  },
+  {
+    "id": 9329,
+    "path": "/Yes",
+    "enabled": true,
+    "shared": false,
+    "phrases": [
+      {
+        "text": "Yes"
+      },
+      {
+        "text": "Yeah"
+      },
+      {
+        "text": "Yep"
+      },
+      {
+        "text": "Aha"
+      },
+      {
+        "text": "Yup"
+      },
+      {
+        "text": "Agree"
+      },
+      {
+        "text": "Roger"
+      },
+      {
+        "text": "Affirmative"
+      },
+      {
+        "text": "Positive"
+      }
+    ],
+    "patterns": []
+  }
+]
