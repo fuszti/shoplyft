@@ -60,7 +60,7 @@
     },
     {
       "id": 50001,
-      "path": "/Yes",
+      "path": "/Hello/Yes",
       "enabled": true,
       "shared": false,
       "phrases": [
