@@ -69,15 +69,20 @@ object ListScenario : Scenario(
     private fun ActionContext.addItemToCart() {
         val cartList = LocalShoppingCart.getAll(request.clientId.toString())
         val targetItem = activator.caila?.slots?.get("target_item").toString()
-        if (!cartList.isNullOrEmpty() && cartList.contains(targetItem)) {
-            val response = targetItem + " in already in your shopping cart. " +
-                    what_else_strings[random(what_else_strings.size)]
-            reactions.say(response)
-        } else {
-            LocalShoppingCart.add(request.clientId.toString(), targetItem)
-            val response = targetItem + " added to you shopping cart. " +
-                    what_else_strings[random(what_else_strings.size)]
-            reactions.say(response)
+        if (targetItem != "null") {
+            if (!cartList.isNullOrEmpty() && cartList.contains(targetItem)) {
+                val response = targetItem + " in already in your shopping cart. " +
+                        what_else_strings[random(what_else_strings.size)]
+                reactions.say(response)
+            } else {
+                LocalShoppingCart.add(request.clientId.toString(), targetItem)
+                val response = targetItem + " added to you shopping cart. " +
+                        what_else_strings[random(what_else_strings.size)]
+                reactions.say(response)
+            }
+        }
+        else {
+            reactions.say("Could you rephrase please?")
         }
     }
 }
