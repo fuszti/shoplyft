@@ -5,7 +5,7 @@ import com.justai.jaicf.template.shoppingcart.LocalShoppingCart
 
 object ListScenario : Scenario() {
 
-    const val firstItem = "/firstItem"
+    const val firstItem = "/start/firstItem"
     private val what_else_strings = listOf(
         "Anything else?",
         "What else do you need?",
