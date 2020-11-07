@@ -19,17 +19,7 @@ object CheckoutScenario : Scenario() {
                     }
                     action {
                         reactions.say("Thank you! Please enter your address!")
-                    }
-
-                    state(addressState) {
-                        activators {
-                            catchAll()
-                        }
-                        action {
-                            val responseString = "Your items will be delivered to ${request.input}. Goodbye!"
-                            reactions.say(responseString)
-                            reactions.go(byeState)
-                        }
+                        reactions.go(addressState)
                     }
                 }
 
@@ -40,6 +30,19 @@ object CheckoutScenario : Scenario() {
                     action {
                         reactions.say("What do you want to remove?")
                         reactions.go(removeState)
+                    }
+                }
+
+                state(addressState) {
+                    state("get address") {
+                        activators {
+                            catchAll()
+                        }
+                        action {
+                            val responseString = "Your items will be delivered to ${request.input}. Goodbye!"
+                            reactions.say(responseString)
+                            reactions.go(byeState)
+                        }
                     }
                 }
             }
