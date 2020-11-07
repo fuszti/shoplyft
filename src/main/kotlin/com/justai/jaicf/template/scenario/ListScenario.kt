@@ -3,21 +3,16 @@ package com.justai.jaicf.template.scenario
 import com.justai.jaicf.model.scenario.Scenario
 
 object ListScenario : Scenario() {
-    object states {
-        val firstItem = "/firstItem"
-    }
+
+    const val firstItem = "/firstItem"
 
     init {
-        state(states.firstItem) {
+        state(firstItem) {
             activators {
                 catchAll()
             }
             action {
-                reactions.run {
-                    sayRandom(
-                            "Anything else? In List"
-                    )
-                }
+                reactions.say("Anything else? In List")
             }
 
             state("yep") {
@@ -26,10 +21,8 @@ object ListScenario : Scenario() {
                 }
 
                 action {
-                    reactions.run {
-                        say("What do you need? In List")
-                        go(states.firstItem)
-                    }
+                    reactions.say("What do you need? In List")
+                    reactions.go(firstItem)
                 }
             }
 
@@ -38,24 +31,18 @@ object ListScenario : Scenario() {
                     intent("No")
                 }
                 action {
-                    reactions.run {
-                        say("Okay In List")
-                        go(MainScenario.states.byeState)
-                    }
+                    reactions.say("Okay In List")
+                    reactions.go(MainScenario.byeState)
                 }
             }
 
             fallback {
-                reactions.run {
-                    // Save that stuff
-                    sayRandom("Anything else?", "What else? In List")
-                }
+                // Save stuff
+                reactions.sayRandom("Anything else?", "What else? In List")
             }
         }
         fallback {
-            reactions.sayRandom(
-                "In LIST top level fallback"
-            )
+            reactions.say("In LIST top level fallback")
         }
     }
 }

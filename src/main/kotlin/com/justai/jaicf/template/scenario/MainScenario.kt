@@ -4,24 +4,18 @@ import com.justai.jaicf.model.scenario.Scenario
 
 object MainScenario : Scenario() {
 
-    object states {
-        val startState = "/start"
-        val byeState = "/bye"
-    }
+    private const val startState = "/start"
+    const val byeState = "/bye"
 
     init {
 
-        state(states.startState) {
+        state(startState) {
             activators {
                 regex("/start")
                 intent("Hello")
             }
             action {
-                reactions.run {
-                    sayRandom(
-                        "Hello and welcome to Shoplyft! Need bread?"
-                    )
-                }
+                reactions.say("Hello and welcome to Shoplyft! Need bread?")
             }
 
             state("yes") {
@@ -30,10 +24,8 @@ object MainScenario : Scenario() {
                 }
 
                 action {
-                    reactions.run {
-                        sayRandom("What do you need?")
-                        go(ListScenario.states.firstItem)
-                    }
+                    reactions.say("What do you need?")
+                    reactions.go(ListScenario.firstItem)
                 }
             }
 
@@ -43,17 +35,15 @@ object MainScenario : Scenario() {
                 }
 
                 action {
-                    reactions.run {
-                        say("Sorry to hear that!")
-                        go(states.byeState)
-                    }
+                    reactions.say("Sorry to hear that!")
+                    reactions.go(byeState)
                 }
             }
         }
 
 
 
-        state(states.byeState) {
+        state(byeState) {
             activators {
                 intent("Bye")
             }
