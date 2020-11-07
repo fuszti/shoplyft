@@ -8,38 +8,48 @@ object MainScenario : Scenario(
 ) {
 
     private const val startState = "/start"
+    private const val helloState = "/start/hello"
     const val addressState = "/finalize/address"
 
     init {
 
-        state(startState) {
+        state(startState){
             activators {
                 regex("/start")
-                intent("Hello")
+                intent("Groceries")
             }
             action {
-                reactions.say("Hello and welcome to Shoplyft! Need groceries?")
+
             }
 
-            state("/start/yes") {
+            state(helloState) {
                 activators {
-                    intent("Yes")
+                    intent("Hello")
                 }
-
                 action {
-                    reactions.say("What do you need?")
-                    reactions.go(ListScenario.listItems)
-                }
-            }
-
-            state("no") {
-                activators {
-                    intent("No")
+                    reactions.say("Hello and welcome to Shoplyft! Need groceries?")
                 }
 
-                action {
-                    reactions.say("Sorry to hear that!")
-                    reactions.go(CheckoutScenario.byeState)
+                state("/start/yes") {
+                    activators {
+                        intent("Yes")
+                    }
+
+                    action {
+                        reactions.say("What do you need?")
+                        reactions.go(ListScenario.listItems)
+                    }
+                }
+
+                state("no") {
+                    activators {
+                        intent("No")
+                    }
+
+                    action {
+                        reactions.say("Sorry to hear that!")
+                        reactions.go(CheckoutScenario.byeState)
+                    }
                 }
             }
         }
