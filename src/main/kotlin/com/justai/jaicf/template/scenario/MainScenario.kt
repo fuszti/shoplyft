@@ -8,7 +8,6 @@ object MainScenario : Scenario(
 ) {
 
     private const val startState = "/start"
-    const val byeState = "/bye"
     const val addressState = "/finalize/address"
 
     init {
@@ -40,22 +39,8 @@ object MainScenario : Scenario(
 
                 action {
                     reactions.say("Sorry to hear that!")
-                    reactions.go(byeState)
+                    reactions.go(CheckoutScenario.byeState)
                 }
-            }
-        }
-
-        state(byeState) {
-            activators {
-                intent("Bye")
-            }
-
-            action {
-                val thanksForShopping = "Thanks for shopping with Shoplyft! "
-                reactions.sayRandom(
-                    thanksForShopping + "See you soon!",
-                    thanksForShopping + "Bye-bye!"
-                )
             }
         }
 

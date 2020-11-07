@@ -7,6 +7,7 @@ object CheckoutScenario : Scenario() {
     const val checkoutState = "/checkout"
     const val confirmState = "/checkout/confirm"
     const val removeState = "/checkout/remove"
+    const val byeState = "/checkout/confirm/bye"
 
     init{
         state(checkoutState) {
@@ -37,7 +38,21 @@ object CheckoutScenario : Scenario() {
                     action {
                         val responseString = "Your items will be delivered to ${request.input}"
                         reactions.say(responseString)
-                        reactions.go(MainScenario.byeState)
+                        reactions.go(byeState)
+                    }
+
+                    state(byeState) {
+                        activators {
+                            intent("Bye")
+                        }
+
+                        action {
+                            val thanksForShopping = "Thanks for shopping with Shoplyft! "
+                            reactions.sayRandom(
+                                thanksForShopping + "See you soon!",
+                                thanksForShopping + "Bye-bye!"
+                            )
+                        }
                     }
                 }
             }
