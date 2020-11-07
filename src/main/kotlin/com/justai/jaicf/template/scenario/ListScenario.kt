@@ -31,7 +31,7 @@ object ListScenario : Scenario(
                     reactions.sayRandom(what_else_strings)
                 }
 
-                state("yep") {
+                state("/list/yes") {
                     activators {
                         intent("Yes")
                     }
