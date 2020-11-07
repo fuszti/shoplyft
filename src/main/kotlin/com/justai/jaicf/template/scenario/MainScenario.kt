@@ -22,14 +22,14 @@ object MainScenario : Scenario(
                 reactions.say("Hello and welcome to Shoplyft! Need groceries?")
             }
 
-            state("yes") {
+            state("/start/yes") {
                 activators {
                     intent("Yes")
                 }
 
                 action {
                     reactions.say("What do you need?")
-                    reactions.go(ListScenario.firstItem)
+                    // reactions.go(ListScenario.firstItem)
                 }
             }
 
@@ -59,7 +59,7 @@ object MainScenario : Scenario(
             }
         }
 
-        state(addressState, noContext = true) {
+        state(addressState) {
             activators {
                 catchAll()
             }
