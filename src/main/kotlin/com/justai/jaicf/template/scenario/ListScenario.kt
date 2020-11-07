@@ -1,6 +1,7 @@
 package com.justai.jaicf.template.scenario
 
 import com.justai.jaicf.model.scenario.Scenario
+import com.justai.jaicf.template.ShoppingCart.LocalShoppingCart
 
 object ListScenario : Scenario() {
 
@@ -12,6 +13,7 @@ object ListScenario : Scenario() {
                 catchAll()
             }
             action {
+                LocalShoppingCart.add(request.clientId.toString(), request.input)
                 reactions.say("Anything else?")
             }
 
