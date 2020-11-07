@@ -41,8 +41,5 @@ object ListScenario : Scenario() {
                 reactions.sayRandom("Anything else?", "What else? In List")
             }
         }
-        fallback {
-            reactions.say("In LIST top level fallback")
-        }
     }
 }
