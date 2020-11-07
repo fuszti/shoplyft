@@ -6,7 +6,8 @@ import com.justai.jaicf.template.shoppingcart.LocalShoppingCart
 
 object ListScenario : Scenario() {
 
-    const val firstItem = "/start/yes/firstItem"
+    const val firstItem = "/list/firstItem"
+    const val listItems = "/list"
     private val what_else_strings = listOf(
         "Anything else?",
         "What else do you need?",
@@ -16,44 +17,46 @@ object ListScenario : Scenario() {
     )
 
     init {
-        state(firstItem) {
-            activators {
-                catchAll()
-            }
-            action {
-                if(request.type == BotRequestType.QUERY){
-                    LocalShoppingCart.add(request.clientId.toString(), request.input)
-                }
-                reactions.sayRandom(what_else_strings)
-            }
-
-            state("yep") {
+        state(listItems) {
+            state(firstItem) {
                 activators {
-                    intent("Yes")
+                    catchAll()
                 }
-
                 action {
+                    if (request.type == BotRequestType.QUERY) {
+                        LocalShoppingCart.add(request.clientId.toString(), request.input)
+                    }
                     reactions.sayRandom(what_else_strings)
-                    reactions.go(firstItem)
                 }
-            }
 
-            state("nah") {
-                activators {
-                    intent("No")
-                }
-                action {
-                    reactions.say("Your items: " + LocalShoppingCart.getAll(request.clientId.toString()))
-                    reactions.say("Okay. Please, enter your delivery address.")
-                    reactions.go(MainScenario.addressState)
-                }
-            }
+                state("yep") {
+                    activators {
+                        intent("Yes")
+                    }
 
-            fallback {
-                if(request.type == BotRequestType.QUERY) {
-                    LocalShoppingCart.add(request.clientId.toString(), request.input)
+                    action {
+                        reactions.sayRandom(what_else_strings)
+                        reactions.go(firstItem)
+                    }
                 }
-                reactions.sayRandom(what_else_strings)
+
+                state("nah") {
+                    activators {
+                        intent("No")
+                    }
+                    action {
+                        reactions.say("Your items: " + LocalShoppingCart.getAll(request.clientId.toString()))
+                        reactions.say("Okay. Please, enter your delivery address.")
+                        reactions.go(MainScenario.addressState)
+                    }
+                }
+
+                fallback {
+                    if (request.type == BotRequestType.QUERY) {
+                        LocalShoppingCart.add(request.clientId.toString(), request.input)
+                    }
+                    reactions.sayRandom(what_else_strings)
+                }
             }
         }
     }

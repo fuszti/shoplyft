@@ -29,7 +29,7 @@ object MainScenario : Scenario(
 
                 action {
                     reactions.say("What do you need?")
-                    // reactions.go(ListScenario.firstItem)
+                    reactions.go(ListScenario.listItems)
                 }
             }
 
