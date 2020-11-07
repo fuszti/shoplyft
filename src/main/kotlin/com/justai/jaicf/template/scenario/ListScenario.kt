@@ -4,7 +4,9 @@ import com.justai.jaicf.api.BotRequestType
 import com.justai.jaicf.model.scenario.Scenario
 import com.justai.jaicf.template.shoppingcart.LocalShoppingCart
 
-object ListScenario : Scenario() {
+object ListScenario : Scenario(
+    dependencies = listOf(CheckoutScenario)
+) {
 
     const val firstItem = "/list/firstItem"
     const val listItems = "/list"
@@ -45,9 +47,8 @@ object ListScenario : Scenario() {
                         intent("No")
                     }
                     action {
-                        reactions.say("Your items: " + LocalShoppingCart.getAll(request.clientId.toString()))
                         reactions.say("Okay. Please, enter your delivery address.")
-                        reactions.go(MainScenario.addressState)
+                        reactions.go(CheckoutScenario.checkoutState)
                     }
                 }
 

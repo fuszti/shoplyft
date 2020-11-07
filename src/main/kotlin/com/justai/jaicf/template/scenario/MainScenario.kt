@@ -59,17 +59,6 @@ object MainScenario : Scenario(
             }
         }
 
-        state(addressState) {
-            activators {
-                catchAll()
-            }
-            action {
-                if(request.type == BotRequestType.QUERY) {
-                    reactions.say("Thank you! Your items will be delivered to ${request.input}.")
-                }
-            }
-        }
-
         fallback {
             reactions.sayRandom(
                 "Sorry, I didn't get that...",
