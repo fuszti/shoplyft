@@ -12,7 +12,7 @@ object ListScenario : Scenario() {
                 catchAll()
             }
             action {
-                reactions.say("Anything else? In List")
+                reactions.say("Anything else?")
             }
 
             state("yep") {
@@ -21,7 +21,7 @@ object ListScenario : Scenario() {
                 }
 
                 action {
-                    reactions.say("What do you need? In List")
+                    reactions.say("What else do you need?")
                     reactions.go(firstItem)
                 }
             }
@@ -31,14 +31,14 @@ object ListScenario : Scenario() {
                     intent("No")
                 }
                 action {
-                    reactions.say("Okay In List")
+                    reactions.say("Okay")
                     reactions.go(MainScenario.byeState)
                 }
             }
 
             fallback {
                 // Save stuff
-                reactions.sayRandom("Anything else?", "What else? In List")
+                reactions.sayRandom("Anything else?", "What else?")
             }
         }
     }
