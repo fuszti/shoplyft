@@ -5,6 +5,13 @@ import com.justai.jaicf.model.scenario.Scenario
 object ListScenario : Scenario() {
 
     const val firstItem = "/firstItem"
+    private val what_else_strings = listOf(
+        "Anything else?",
+        "What else do you need?",
+        "Any other items you need?",
+        "What else you'd like to buy?",
+        "What else?"
+    )
 
     init {
         state(firstItem) {
@@ -12,7 +19,7 @@ object ListScenario : Scenario() {
                 catchAll()
             }
             action {
-                reactions.say("Anything else?")
+                reactions.sayRandom(what_else_strings)
             }
 
             state("yep") {
@@ -21,7 +28,7 @@ object ListScenario : Scenario() {
                 }
 
                 action {
-                    reactions.say("What else do you need?")
+                    reactions.sayRandom(what_else_strings)
                     reactions.go(firstItem)
                 }
             }
@@ -31,14 +38,14 @@ object ListScenario : Scenario() {
                     intent("No")
                 }
                 action {
-                    reactions.say("Okay")
-                    reactions.go(MainScenario.byeState)
+                    reactions.say("Okay. Please, enter your delivery address.")
+                    reactions.go(MainScenario.addressState)
                 }
             }
 
             fallback {
                 // Save stuff
-                reactions.sayRandom("Anything else?", "What else?")
+                reactions.sayRandom(what_else_strings)
             }
         }
     }
