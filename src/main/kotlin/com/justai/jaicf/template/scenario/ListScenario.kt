@@ -10,7 +10,7 @@ object ListScenario : Scenario() {
     init {
         state(states.firstItem) {
             activators {
-                catchAll()
+                regex(".*")
             }
             action {
                 reactions.run {
