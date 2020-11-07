@@ -2,7 +2,9 @@ package com.justai.jaicf.template.scenario
 
 import com.justai.jaicf.model.scenario.Scenario
 
-object MainScenario : Scenario() {
+object MainScenario : Scenario(
+    dependencies = listOf(ListScenario)
+) {
 
     private const val startState = "/start"
     const val byeState = "/bye"
