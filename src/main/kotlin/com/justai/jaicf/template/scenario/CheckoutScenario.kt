@@ -53,6 +53,16 @@ object CheckoutScenario : Scenario() {
                     }
                 }
 
+                state("yes") {
+                    activators {
+                        intent("yes")
+                    }
+                    action {
+                        reactions.say("What do you want to remove?")
+                        reactions.go(removeState)
+                    }
+                }
+
                 state("nothing to remove") {
                     activators {
                         intent("No")
