@@ -19,7 +19,7 @@ object MainScenario : Scenario(
                 intent("Groceries")
             }
             action {
-
+                reactions.say("Hello and welcome to Shoplyft!")
             }
 
             state(helloState) {
@@ -27,7 +27,7 @@ object MainScenario : Scenario(
                     intent("Hello")
                 }
                 action {
-                    reactions.say("Hello and welcome to Shoplyft! Need groceries?")
+                    reactions.say("Welcome to Shoplyft! Need groceries?")
                 }
 
                 state("/start/yes") {
