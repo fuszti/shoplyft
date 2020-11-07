@@ -18,7 +18,8 @@ object CheckoutScenario : Scenario() {
                         intent("Yes")
                     }
                     action {
-                        reactions.say("Thank you! Please enter your address!")
+                        MainScenario.lastMessage = "Thank you! Please enter your address!"
+                        reactions.say(MainScenario.lastMessage)
                         reactions.go(addressState)
                     }
                 }

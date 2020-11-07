@@ -37,6 +37,7 @@ object ListScenario : Scenario(
                     }
 
                     action {
+
                         reactions.sayRandom(what_else_strings)
                     }
                 }
@@ -46,10 +47,10 @@ object ListScenario : Scenario(
                         intent("No")
                     }
                     action {
-                        val responseString = "Thank you! Your items are: " +
+                        MainScenario.lastMessage = "Thank you! Your items are: " +
                                 LocalShoppingCart.getAll(request.clientId.toString())?.joinToString() +
                                 " Is it correct?"
-                        reactions.say(responseString)
+                        reactions.say(MainScenario.lastMessage)
                         reactions.go(CheckoutScenario.confirmState)
                     }
                 }

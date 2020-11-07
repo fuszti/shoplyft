@@ -10,6 +10,14 @@ object MainScenario : Scenario(
     private const val startState = "/start"
     private const val helloState = "/start/hello"
     const val addressState = "/finalize/address"
+    var lastMessage = ""
+
+    fun getDidNotUnderstandResponses(question: String): List<String>{
+        return listOf(
+            "Sorry, I didn't get that...$question",
+            "Sorry, I did not understand.$question"
+        )
+    }
 
     init {
 
@@ -27,7 +35,8 @@ object MainScenario : Scenario(
                     intent("Hello")
                 }
                 action {
-                    reactions.say("Welcome to Shoplyft! Need groceries?")
+                    lastMessage = "Welcome to Shoplyft! Need groceries?"
+                    reactions.say(lastMessage)
                 }
 
                 state("/start/yes") {
@@ -36,7 +45,8 @@ object MainScenario : Scenario(
                     }
 
                     action {
-                        reactions.say("What do you need?")
+                        lastMessage = "What do you need?"
+                        reactions.say(lastMessage)
                         reactions.go(ListScenario.listItems)
                     }
                 }
@@ -55,10 +65,7 @@ object MainScenario : Scenario(
         }
 
         fallback {
-            reactions.sayRandom(
-                "Sorry, I didn't get that...",
-                "Sorry, could you repeat please?"
-            )
+            reactions.sayRandom(getDidNotUnderstandResponses(lastMessage))
         }
     }
 }
