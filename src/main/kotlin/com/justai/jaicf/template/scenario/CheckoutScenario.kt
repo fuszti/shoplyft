@@ -51,28 +51,28 @@ object CheckoutScenario : Scenario() {
                         LocalShoppingCart.remove(request.clientId.toString(), request.input)
                         reactions.say("Do you want to remove anything else?")
                     }
-                }
 
-                state("yes") {
-                    activators {
-                        intent("yes")
+                    state("yes") {
+                        activators {
+                            intent("yes")
+                        }
+                        action {
+                            reactions.say("What do you want to remove?")
+                            reactions.go(removeState)
+                        }
                     }
-                    action {
-                        reactions.say("What do you want to remove?")
-                        reactions.go(removeState)
-                    }
-                }
 
-                state("nothing to remove") {
-                    activators {
-                        intent("No")
-                    }
-                    action {
-                        val responseString = "Thank you! Your items are: " +
-                                LocalShoppingCart.getAll(request.clientId.toString()) +
-                                " Is it correct?"
-                        reactions.say(responseString)
-                        reactions.go(confirmState)
+                    state("nothing to remove") {
+                        activators {
+                            intent("No")
+                        }
+                        action {
+                            val responseString = "Thank you! Your items are: " +
+                                    LocalShoppingCart.getAll(request.clientId.toString()) +
+                                    " Is it correct?"
+                            reactions.say(responseString)
+                            reactions.go(confirmState)
+                        }
                     }
                 }
             }
