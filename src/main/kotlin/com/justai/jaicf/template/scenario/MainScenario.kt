@@ -1,55 +1,66 @@
 package com.justai.jaicf.template.scenario
 
-import com.justai.jaicf.activator.caila.caila
 import com.justai.jaicf.model.scenario.Scenario
 
 object MainScenario : Scenario() {
 
+    object states {
+        val startState = "start"
+        val byeState = "bye"
+    }
+
     init {
-        state("start") {
+
+        state(states.startState) {
             activators {
                 regex("/start")
                 intent("Hello")
             }
             action {
                 reactions.run {
-                    image("https://media.giphy.com/media/ICOgUNjpvO0PC/source.gif")
                     sayRandom(
-                        "Csumpalumpa! How can I help?",
-                        "Csokito there! How can I help you?"
+                        "Hello and welcome to Shoplyft! Need bread?"
                     )
-                    buttons(
-                        "Help me!",
-                        "How are you?",
-                        "What is your name?"
-                    )
+                }
+            }
+
+            state("yes") {
+                activators {
+                    intent("YesIntent")
+                }
+
+                action {
+                    reactions.run {
+                        sayRandom("What do you need?")
+                        go(ListScenario.states.firstItem)
+                    }
+                }
+            }
+
+            state("no") {
+                activators {
+                    intent("NoIntent")
+                }
+
+                action {
+                    reactions.go(states.byeState)
                 }
             }
         }
 
-        state("bye") {
+
+
+        state(states.byeState) {
             activators {
                 intent("Bye")
             }
 
             action {
+                val thanksForShopping = "Thanks for shopping with Shoplyft! "
                 reactions.sayRandom(
-                    "See you soon!",
-                    "Bye-bye!"
+                    thanksForShopping + "See you soon!",
+                    thanksForShopping + "Bye-bye!"
                 )
-                reactions.image("https://media.giphy.com/media/EE185t7OeMbTy/source.gif")
-            }
-        }
-
-        state("smalltalk", noContext = true) {
-            activators {
-                anyIntent()
-            }
-
-            action {
-                activator.caila?.topIntent?.answer?.let {
-                    reactions.say(it)
-                }
             }
         }
 
