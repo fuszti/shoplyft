@@ -41,11 +41,14 @@ object MainScenario : Scenario() {
 
             state("no") {
                 activators {
-                    intent("Disagreement")
+                    regex("no")
                 }
 
                 action {
-                    reactions.go(states.byeState)
+                    reactions.run {
+                        say("Sorry to hear that!")
+                        go(states.byeState)
+                    }
                 }
             }
         }
