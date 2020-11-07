@@ -47,7 +47,7 @@ object ListScenario : Scenario(
                     }
                     action {
                         val responseString = "Thank you! Your items are: " +
-                                LocalShoppingCart.getAll(request.clientId.toString()) +
+                                LocalShoppingCart.getAll(request.clientId.toString())?.joinToString() +
                                 " Is it correct?"
                         reactions.say(responseString)
                         reactions.go(CheckoutScenario.confirmState)
