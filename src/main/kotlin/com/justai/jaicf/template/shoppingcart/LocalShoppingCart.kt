@@ -19,4 +19,8 @@ object LocalShoppingCart : ShoppingCart {
     override fun getAll(unit: String): List<String>? {
         return shoppingCart[unit]?.toList()
     }
+
+    override fun clear(unit: String) {
+        shoppingCart[unit]?.clear()
+    }
 }

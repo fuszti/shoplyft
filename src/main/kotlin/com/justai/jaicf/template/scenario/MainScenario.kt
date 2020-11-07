@@ -2,6 +2,7 @@ package com.justai.jaicf.template.scenario
 
 import com.justai.jaicf.api.BotRequestType
 import com.justai.jaicf.model.scenario.Scenario
+import com.justai.jaicf.template.shoppingcart.LocalShoppingCart
 
 object MainScenario : Scenario(
     dependencies = listOf(ListScenario)
@@ -27,6 +28,7 @@ object MainScenario : Scenario(
                 intent("Groceries")
             }
             action {
+                LocalShoppingCart.clear(request.clientId.toString())
                 reactions.say("Hello and welcome to Shoplyft!")
             }
 
