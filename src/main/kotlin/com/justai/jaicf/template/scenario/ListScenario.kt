@@ -57,9 +57,17 @@ object ListScenario : Scenario(
 
                 fallback {
                     if (request.type == BotRequestType.QUERY) {
-                        LocalShoppingCart.add(request.clientId.toString(), request.input)
+                        val cartList = LocalShoppingCart.getAll(request.clientId.toString())
+                        if(!cartList.isNullOrEmpty() && cartList.contains(request.input)){
+                            val response = request.input + " in already in your shopping cart. " + random(what_else_strings.size)
+                            reactions.say(response)
+                        }
+                        else{
+                            LocalShoppingCart.add(request.clientId.toString(), request.input)
+                            val response = request.input + " added to you shopping cart. " + random(what_else_strings.size)
+                            reactions.say(response)
+                        }
                     }
-                    reactions.sayRandom(what_else_strings)
                 }
             }
         }
