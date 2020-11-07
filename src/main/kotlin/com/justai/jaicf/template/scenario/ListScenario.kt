@@ -1,5 +1,6 @@
 package com.justai.jaicf.template.scenario
 
+import com.justai.jaicf.activator.caila.caila
 import com.justai.jaicf.api.BotRequestType
 import com.justai.jaicf.model.scenario.Scenario
 import com.justai.jaicf.template.shoppingcart.LocalShoppingCart
@@ -22,11 +23,12 @@ object ListScenario : Scenario(
         state(listItems) {
             state(firstItem) {
                 activators {
-                    catchAll()
+                    intent("ItemsFromShop")
                 }
                 action {
+                    val target_item = activator.caila?.slots?.get("target_item")
                     if (request.type == BotRequestType.QUERY) {
-                        LocalShoppingCart.add(request.clientId.toString(), request.input)
+                        LocalShoppingCart.add(request.clientId.toString(), target_item.toString())
                     }
                     reactions.sayRandom(what_else_strings)
                 }
