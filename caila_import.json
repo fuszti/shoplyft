@@ -46,6 +46,52 @@
           "text": "welcome"
         }
       ],
+      "patterns": [
+        {
+          "text": "hey"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "hello"
+        }
+      ]
+    },
+    {
+      "id": 50001,
+      "path": "/Yes",
+      "enabled": true,
+      "shared": false,
+      "phrases": [
+        {
+          "text": "yes"
+        },
+        {
+          "text": "yep"
+        },
+        {
+          "text": "aha"
+        }
+      ],
+      "patterns": []
+    },
+    {
+      "id": 50002,
+      "path": "/No",
+      "enabled": true,
+      "shared": false,
+      "phrases": [
+        {
+          "text": "no"
+        },
+        {
+          "text": "nope"
+        },
+        {
+          "text": "nah"
+        }
+      ],
       "patterns": []
     },
     {

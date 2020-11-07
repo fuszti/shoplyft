@@ -26,9 +26,7 @@ object MainScenario : Scenario() {
 
             state("yes") {
                 activators {
-                    intent("Agreement")
                     intent("Yes")
-                    intent("yes")
                 }
 
                 action {
@@ -41,7 +39,7 @@ object MainScenario : Scenario() {
 
             state("no") {
                 activators {
-                    regex("no")
+                    intent("No")
                 }
 
                 action {
