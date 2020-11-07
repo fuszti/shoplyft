@@ -47,8 +47,11 @@ object ListScenario : Scenario(
                         intent("No")
                     }
                     action {
-                        reactions.say("Okay. Please, enter your delivery address.")
-                        reactions.go(CheckoutScenario.checkoutState)
+                        val responseString = "Thank you! Your items are: " +
+                                LocalShoppingCart.getAll(request.clientId.toString()) +
+                                " Is it correct?"
+                        reactions.say(responseString)
+                        reactions.go(CheckoutScenario.confirmState)
                     }
                 }
 
