@@ -6,6 +6,7 @@ import com.justai.jaicf.template.shoppingcart.LocalShoppingCart
 object CheckoutScenario : Scenario() {
     const val checkoutState = "/checkout"
     const val confirmState = "/checkout/confirm"
+    const val addressState = "/checkout/confirm/address"
     const val removeState = "/checkout/remove"
     const val byeState = "/bye"
 
@@ -19,6 +20,17 @@ object CheckoutScenario : Scenario() {
                     action {
                         reactions.say("Thank you! Please enter your address!")
                     }
+
+                    state(addressState) {
+                        activators {
+                            catchAll()
+                        }
+                        action {
+                            val responseString = "Your items will be delivered to ${request.input}. Goodbye!"
+                            reactions.say(responseString)
+                            reactions.go(byeState)
+                        }
+                    }
                 }
 
                 state("no") {
@@ -28,17 +40,6 @@ object CheckoutScenario : Scenario() {
                     action {
                         reactions.say("What do you want to remove?")
                         reactions.go(removeState)
-                    }
-                }
-
-                state("address") {
-                    activators {
-                        catchAll()
-                    }
-                    action {
-                        val responseString = "Your items will be delivered to ${request.input}. Goodbye!"
-                        reactions.say(responseString)
-                        reactions.go(byeState)
                     }
                 }
             }
