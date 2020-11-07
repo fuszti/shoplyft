@@ -36,7 +36,7 @@ object CheckoutScenario : Scenario() {
                         catchAll()
                     }
                     action {
-                        val responseString = "Your items will be delivered to ${request.input}"
+                        val responseString = "Your items will be delivered to ${request.input}. Goodbye!"
                         reactions.say(responseString)
                         reactions.go(byeState)
                     }
