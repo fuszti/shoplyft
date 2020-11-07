@@ -26,7 +26,9 @@ object MainScenario : Scenario() {
 
             state("yes") {
                 activators {
-                    intent("YesIntent")
+                    intent("Agreement")
+                    intent("Yes")
+                    intent("yes")
                 }
 
                 action {
@@ -39,7 +41,7 @@ object MainScenario : Scenario() {
 
             state("no") {
                 activators {
-                    intent("NoIntent")
+                    intent("Disagreement")
                 }
 
                 action {
