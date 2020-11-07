@@ -1,6 +1,7 @@
 package com.justai.jaicf.template.scenario
 
 import com.justai.jaicf.api.BotRequestType
+import com.justai.jaicf.context.ActionContext
 import com.justai.jaicf.model.scenario.Scenario
 import com.justai.jaicf.template.shoppingcart.LocalShoppingCart
 
@@ -17,6 +18,7 @@ object ListScenario : Scenario(
         "What else you'd like to buy?",
         "What else?"
     )
+
 
     init {
         state(listItems) {
@@ -38,7 +40,7 @@ object ListScenario : Scenario(
 
                     action {
 
-                        reactions.sayRandom(what_else_strings)
+                        addItemToCart()
                     }
                 }
 
@@ -57,19 +59,24 @@ object ListScenario : Scenario(
 
                 fallback {
                     if (request.type == BotRequestType.QUERY) {
-                        val cartList = LocalShoppingCart.getAll(request.clientId.toString())
-                        if(!cartList.isNullOrEmpty() && cartList.contains(request.input)){
-                            val response = request.input + " in already in your shopping cart. " + random(what_else_strings.size)
-                            reactions.say(response)
-                        }
-                        else{
-                            LocalShoppingCart.add(request.clientId.toString(), request.input)
-                            val response = request.input + " added to you shopping cart. " + random(what_else_strings.size)
-                            reactions.say(response)
-                        }
+                        addItemToCart()
                     }
                 }
             }
+        }
+    }
+
+    private fun ActionContext.addItemToCart() {
+        val cartList = LocalShoppingCart.getAll(request.clientId.toString())
+        if (!cartList.isNullOrEmpty() && cartList.contains(request.input)) {
+            val response = request.input + " in already in your shopping cart. " +
+                    what_else_strings[random(what_else_strings.size)]
+            reactions.say(response)
+        } else {
+            LocalShoppingCart.add(request.clientId.toString(), request.input)
+            val response = request.input + " added to you shopping cart. " +
+                    what_else_strings[random(what_else_strings.size)]
+            reactions.say(response)
         }
     }
 }
