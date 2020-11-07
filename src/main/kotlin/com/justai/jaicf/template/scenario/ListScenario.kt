@@ -28,9 +28,8 @@ object ListScenario : Scenario(
                 }
                 action {
                     if (request.type == BotRequestType.QUERY) {
-                        LocalShoppingCart.add(request.clientId.toString(), request.input)
+                        addItemToCart()
                     }
-                    reactions.sayRandom(what_else_strings)
                 }
 
                 state("/list/yes") {
@@ -40,7 +39,7 @@ object ListScenario : Scenario(
 
                     action {
 
-                        addItemToCart()
+                        reactions.sayRandom(what_else_strings)
                     }
                 }
 
@@ -51,7 +50,7 @@ object ListScenario : Scenario(
                     action {
                         MainScenario.lastMessage = "Thank you! Your items are: " +
                                 LocalShoppingCart.getAll(request.clientId.toString())?.joinToString() +
-                                " Is it correct?"
+                                ". Is it correct?"
                         reactions.say(MainScenario.lastMessage)
                         reactions.go(CheckoutScenario.confirmState)
                     }
