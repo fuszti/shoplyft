@@ -1,5 +1,6 @@
 package com.justai.jaicf.template.scenario
 
+import com.justai.jaicf.api.BotRequestType
 import com.justai.jaicf.model.scenario.Scenario
 
 object MainScenario : Scenario(
@@ -58,12 +59,14 @@ object MainScenario : Scenario(
             }
         }
 
-        state(addressState) {
+        state(addressState, noContext = true) {
             activators {
                 catchAll()
             }
             action {
-                reactions.say("Thank you! Your items will be delivered to ${request.input}.")
+                if(request.type == BotRequestType.QUERY) {
+                    reactions.say("Thank you! Your items will be delivered to ${request.input}.")
+                }
             }
         }
 

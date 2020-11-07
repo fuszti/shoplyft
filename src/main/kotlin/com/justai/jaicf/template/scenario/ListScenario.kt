@@ -1,5 +1,6 @@
 package com.justai.jaicf.template.scenario
 
+import com.justai.jaicf.api.BotRequestType
 import com.justai.jaicf.model.scenario.Scenario
 import com.justai.jaicf.template.shoppingcart.LocalShoppingCart
 
@@ -20,7 +21,9 @@ object ListScenario : Scenario() {
                 catchAll()
             }
             action {
-                LocalShoppingCart.add(request.clientId.toString(), request.input)
+                if(request.type == BotRequestType.QUERY){
+                    LocalShoppingCart.add(request.clientId.toString(), request.input)
+                }
                 reactions.sayRandom(what_else_strings)
             }
 
@@ -47,7 +50,9 @@ object ListScenario : Scenario() {
             }
 
             fallback {
-                LocalShoppingCart.add(request.clientId.toString(), request.input)
+                if(request.type == BotRequestType.QUERY) {
+                    LocalShoppingCart.add(request.clientId.toString(), request.input)
+                }
                 reactions.sayRandom(what_else_strings)
             }
         }
