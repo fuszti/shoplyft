@@ -19,7 +19,7 @@ object MainScenario : Scenario() {
             action {
                 reactions.run {
                     sayRandom(
-                        "Hello and welcome to Shoplyft! Need bread?"
+                        "Hello and welcome to Shoplyft! Need bread? JKJK"
                     )
                 }
             }
