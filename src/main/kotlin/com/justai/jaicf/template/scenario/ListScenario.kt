@@ -1,7 +1,7 @@
 package com.justai.jaicf.template.scenario
 
 import com.justai.jaicf.model.scenario.Scenario
-import com.justai.jaicf.template.ShoppingCart.LocalShoppingCart
+import com.justai.jaicf.template.shoppingcart.LocalShoppingCart
 
 object ListScenario : Scenario() {
 

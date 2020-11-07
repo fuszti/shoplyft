@@ -1,4 +1,4 @@
-package com.justai.jaicf.template.ShoppingCart
+package com.justai.jaicf.template.shoppingcart
 
 import kotlin.collections.HashMap
 
