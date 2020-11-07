@@ -9,7 +9,7 @@ object ListScenario : Scenario() {
     init {
         state(firstItem) {
             activators {
-                catchAll()
+                intent("Yes")
             }
             action {
                 reactions.say("Anything else? In List")
