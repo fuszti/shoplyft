@@ -76,8 +76,17 @@ object CheckoutScenario : Scenario() {
                         catchAll()
                     }
                     action {
-                        LocalShoppingCart.remove(request.clientId.toString(), request.input)
-                        reactions.say("Do you want to remove anything else?")
+                        val cartList = LocalShoppingCart.getAll(request.clientId.toString())
+                        if(!cartList.isNullOrEmpty() && cartList.contains(request.input)){
+                            LocalShoppingCart.remove(request.clientId.toString(), request.input)
+                            reactions.say(request.input + " removed from shopping cart")
+                        }
+                        else{
+                            reactions.say("Shopping cart does not contain " + request.input +
+                                    ". Do you want to remove something else?")
+                        }
+
+
                     }
                 }
             }
