@@ -2,6 +2,7 @@ package com.justai.jaicf.template.scenario
 
 import com.justai.jaicf.activator.caila.caila
 import com.justai.jaicf.api.BotRequestType
+import com.justai.jaicf.context.ActionContext
 import com.justai.jaicf.model.scenario.Scenario
 import com.justai.jaicf.template.shoppingcart.LocalShoppingCart
 
@@ -19,6 +20,7 @@ object ListScenario : Scenario(
         "What else?"
     )
 
+
     init {
         state(listItems) {
             state(firstItem) {
@@ -26,11 +28,9 @@ object ListScenario : Scenario(
                     intent("ItemsFromShop")
                 }
                 action {
-                    val target_item = activator.caila?.slots?.get("target_item")
                     if (request.type == BotRequestType.QUERY) {
-                        LocalShoppingCart.add(request.clientId.toString(), target_item.toString())
+                        addItemToCart()
                     }
-                    reactions.sayRandom(what_else_strings)
                 }
 
                 state("/list/yes") {
@@ -39,6 +39,7 @@ object ListScenario : Scenario(
                     }
 
                     action {
+
                         reactions.sayRandom(what_else_strings)
                     }
                 }
@@ -48,21 +49,35 @@ object ListScenario : Scenario(
                         intent("No")
                     }
                     action {
-                        val responseString = "Thank you! Your items are: " +
-                                LocalShoppingCart.getAll(request.clientId.toString()) +
-                                " Is it correct?"
-                        reactions.say(responseString)
+                        MainScenario.lastMessage = "Thank you! Your items are: " +
+                                LocalShoppingCart.getAll(request.clientId.toString())?.joinToString() +
+                                ". Is it correct?"
+                        reactions.say(MainScenario.lastMessage)
                         reactions.go(CheckoutScenario.confirmState)
                     }
                 }
 
                 fallback {
                     if (request.type == BotRequestType.QUERY) {
-                        LocalShoppingCart.add(request.clientId.toString(), request.input)
+                        addItemToCart()
                     }
-                    reactions.sayRandom(what_else_strings)
                 }
             }
+        }
+    }
+
+    private fun ActionContext.addItemToCart() {
+        val cartList = LocalShoppingCart.getAll(request.clientId.toString())
+        val targetItem = activator.caila?.slots?.get("target_item").toString()
+        if (!cartList.isNullOrEmpty() && cartList.contains(targetItem)) {
+            val response = targetItem + " in already in your shopping cart. " +
+                    what_else_strings[random(what_else_strings.size)]
+            reactions.say(response)
+        } else {
+            LocalShoppingCart.add(request.clientId.toString(), targetItem)
+            val response = targetItem + " added to you shopping cart. " +
+                    what_else_strings[random(what_else_strings.size)]
+            reactions.say(response)
         }
     }
 }

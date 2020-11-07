@@ -18,7 +18,8 @@ object CheckoutScenario : Scenario() {
                         intent("Yes")
                     }
                     action {
-                        reactions.say("Thank you! Please enter your address!")
+                        MainScenario.lastMessage = "Thank you! Please enter your address!"
+                        reactions.say(MainScenario.lastMessage)
                         reactions.go(addressState)
                     }
                 }
@@ -63,7 +64,7 @@ object CheckoutScenario : Scenario() {
                     }
                     action {
                         val responseString = "Thank you! Your items are: " +
-                                LocalShoppingCart.getAll(request.clientId.toString()) +
+                                LocalShoppingCart.getAll(request.clientId.toString())?.joinToString() +
                                 " Is it correct?"
                         reactions.say(responseString)
                         reactions.go(confirmState)
@@ -75,8 +76,15 @@ object CheckoutScenario : Scenario() {
                         catchAll()
                     }
                     action {
-                        LocalShoppingCart.remove(request.clientId.toString(), request.input)
-                        reactions.say("Do you want to remove anything else?")
+                        val cartList = LocalShoppingCart.getAll(request.clientId.toString())
+                        if(!cartList.isNullOrEmpty() && cartList.contains(request.input)){
+                            LocalShoppingCart.remove(request.clientId.toString(), request.input)
+                            reactions.say(request.input + " removed from shopping cart. What else do you want to remove?")
+                        }
+                        else{
+                            reactions.say("Shopping cart does not contain " + request.input +
+                                    ". Do you want to remove something else?")
+                        }
                     }
                 }
             }
