@@ -4,7 +4,7 @@ import com.justai.jaicf.model.scenario.Scenario
 
 object ListScenario : Scenario() {
     object states {
-        val firstItem = "firstItem"
+        val firstItem = "/firstItem"
     }
 
     init {

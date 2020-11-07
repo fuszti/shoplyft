@@ -5,8 +5,8 @@ import com.justai.jaicf.model.scenario.Scenario
 object MainScenario : Scenario() {
 
     object states {
-        val startState = "start"
-        val byeState = "bye"
+        val startState = "/start"
+        val byeState = "/bye"
     }
 
     init {
