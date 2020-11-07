@@ -39,7 +39,7 @@
     "patterns": []
   },
   {
-    "id": 9330,
+    "id": 9334,
     "path": "/No",
     "enabled": true,
     "shared": false,
@@ -49,6 +49,9 @@
       },
       {
         "text": "Nope"
+      },
+      {
+        "text": "Nothing"
       },
       {
         "text": "None"
