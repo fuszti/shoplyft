@@ -40,6 +40,7 @@ object ListScenario : Scenario() {
                     intent("No")
                 }
                 action {
+                    reactions.say("Your items: " + LocalShoppingCart.getAll(request.clientId.toString()))
                     reactions.say("Okay. Please, enter your delivery address.")
                     reactions.go(MainScenario.addressState)
                 }

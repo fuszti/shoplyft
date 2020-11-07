@@ -8,7 +8,7 @@ object MainScenario : Scenario(
 
     private const val startState = "/start"
     const val byeState = "/bye"
-    const val addressState = "/address"
+    const val addressState = "/finalize/address"
 
     init {
 
@@ -60,7 +60,7 @@ object MainScenario : Scenario(
 
         state(addressState) {
             activators {
-                intent("Address")
+                catchAll()
             }
             action {
                 reactions.say("Thank you! Your items will be delivered to ${request.input}.")
